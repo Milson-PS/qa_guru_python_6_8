@@ -7,36 +7,41 @@ from homework.models import Product, Cart
 
 
 @pytest.fixture
+
+
 def product():
     return Product("book", 100, "This is a book", 1000)
 
 
 @pytest.fixture
+
+
 def second_product():
-    return Product("postcard", 50, "This is a postcard", 50)
+    return Product("postcard", 5, "This is a postcard", 50)
 
 
 @pytest.fixture
+
+
 def cart():
     return Cart()
 
 
 class TestProducts:
 
+
     def test_product_check_quantity(self, product):
-        # TODO напишите проверки на метод check_quantity
-        assert product.check_quantity(1000)
-        assert product.check_quantity(1001) is False
+    # TODO напишите проверки на метод check_quantity
+      assert product.check_quantity(1000)
+      assert product.check_quantity(1001) is False
 
 
     def test_product_buy(self, product):
-        # TODO напишите проверки на метод buy
         product.buy(100)
         assert product.quantity == 900
 
+
     def test_product_buy_more_than_available(self, product):
-        # TODO напишите проверки на метод buy,
-        #  которые ожидают ошибку ValueError при попытке купить больше, чем есть в наличии
         with pytest.raises(ValueError):
             product.buy(1100)
 
@@ -54,8 +59,7 @@ class TestCart:
         assert cart.products[product] == 3
 
         cart.add_product(product, 10)
-        assert cart.products[product] == 10
-
+        assert cart.products[product] == 13
 
     def test_remove_product_from_cart_more_than_available(self, cart, product):
         cart.add_product(product, 3)
@@ -85,7 +89,7 @@ class TestCart:
         cart.add_product(product, 10)
         cart.add_product(second_product, 3)
 
-        assert cart.get_total_price() == 1150
+        assert cart.get_total_price() == 1015
 
     def test_buy_more_products_that_available(self, cart, product):
         cart.add_product(product, 1001)
