@@ -17,20 +17,26 @@ class Product:
             и False в обратном случае
         """
         return self.quantity >= quantity
+        raise ValueError
 
-    def buy(self, quantity):
-        """
-        TODO реализуйте метод покупки
-            Проверьте количество продукта используя метод check_quantity
-            Если продуктов не хватает, то выбросите исключение ValueError
-        """
-        if self.check_quantity(quantity):
-            self.quantity = self.quantity - quantity
-        else:
-            raise ValueError('Not enough product')
+        return self.quantity >= quantity
 
-    def __hash__(self):
-        return hash(self.name + self.description)
+
+def buy(self, quantity):
+    """
+    TODO реализуйте метод покупки
+        Проверьте количество продукта используя метод check_quantity
+        Если продуктов не хватает, то выбросите исключение ValueError
+    """
+    if self.check_quantity(quantity):
+        self.quantity = self.quantity - quantity
+    else:
+        raise ValueError('Not enough product')
+
+
+
+def __hash__(self):
+    return hash(self.name + self.description)
 
 
 class Cart:
@@ -83,8 +89,5 @@ class Cart:
         В этом случае нужно выбросить исключение ValueError
         """
         for product in self.products.keys():
-            if product.check_quantity(self.products[product]):
                 product.buy(self.products[product])
-            else:
-                raise ValueError
         self.clear()

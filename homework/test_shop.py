@@ -26,6 +26,8 @@ class TestProducts:
     def test_product_check_quantity(self, product):
         # TODO напишите проверки на метод check_quantity
         assert product.check_quantity(1000)
+        assert product.check_quantity(1001) is False
+
 
     def test_product_buy(self, product):
         # TODO напишите проверки на метод buy
@@ -49,13 +51,15 @@ class TestCart:
 
     def test_add_product_to_cart(self, cart, product):
         cart.add_product(product, 3)
-
         assert cart.products[product] == 3
+
+        cart.add_product(product, 10)
+        assert cart.products[product] == 10
+
 
     def test_remove_product_from_cart_more_than_available(self, cart, product):
         cart.add_product(product, 3)
         cart.remove_product(product, 10)
-
         assert cart.products == {}
 
     def test_remove_product_from_cart_if_not_remove_count(self, cart, product):
